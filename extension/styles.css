@@ -1,0 +1,164 @@
+/* NC Court Portal Training Extension Styles V1.5 */
+
+/* Main overlay panel */
+#case-training-overlay {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+}
+
+/* Smooth transitions */
+#case-training-overlay * {
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Case cards hover effect */
+#case-training-overlay [data-case-id] {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#case-training-overlay [data-case-id]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Checkbox styling */
+#case-training-overlay input[type="checkbox"] {
+    accent-color: #2563eb;
+    cursor: pointer;
+}
+
+#case-training-overlay input[type="checkbox"]:focus {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+}
+
+/* Button hover states */
+#case-training-overlay button:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+    transition: all 0.2s ease;
+}
+
+/* Export button animation */
+#export-btn:active {
+    transform: scale(0.98);
+}
+
+/* Textarea focus */
+#case-training-overlay textarea:focus {
+    outline: 2px solid #2563eb;
+    border-color: #2563eb;
+}
+
+/* Detail badge animations */
+#case-training-overlay span[style*="DETAIL PAGE"],
+#case-training-overlay span[style*="SKIP DETAIL"] {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Scrollbar styling */
+#case-training-overlay ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+#case-training-overlay ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+#case-training-overlay ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+#case-training-overlay ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Loading indicator */
+.loading-spinner {
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #2563eb;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+    margin-left: 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Address info box */
+.address-info {
+    background: linear-gradient(135deg, #f9fafb, #f3f4f6);
+    border-left: 3px solid #2563eb;
+    padding: 8px;
+    margin: 4px 0;
+    border-radius: 4px;
+    font-size: 11px;
+}
+
+/* Qualified/Skipped headers */
+.case-section-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(8px);
+}
+
+/* Link hover effects */
+#case-training-overlay a {
+    text-decoration: none;
+    position: relative;
+}
+
+#case-training-overlay a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: #2563eb;
+    transition: width 0.3s ease;
+}
+
+#case-training-overlay a:hover::after {
+    width: 100%;
+}
+
+/* Accessibility improvements */
+#case-training-overlay input[type="checkbox"]:focus-visible,
+#case-training-overlay button:focus-visible,
+#case-training-overlay textarea:focus-visible {
+    outline: 3px solid #2563eb;
+    outline-offset: 2px;
+}
+
+/* Dark mode support (if browser is in dark mode) */
+@media (prefers-color-scheme: dark) {
+    #case-training-overlay {
+        background: #1f2937 !important;
+        color: #f9fafb !important;
+    }
+    
+    #case-training-overlay [data-case-id] {
+        background: #374151 !important;
+        border-color: #4b5563 !important;
+    }
+    
+    #case-training-overlay textarea {
+        background: #1f2937 !important;
+        color: #f9fafb !important;
+        border-color: #4b5563 !important;
+    }
+}

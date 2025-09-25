@@ -1,0 +1,45 @@
+{
+    "manifest_version": 3,
+    "name": "NC Court Training Extension V1.5 ENHANCED",
+    "version": "1.5.0",
+    "description": "Enhanced eviction case training tool with smart detail navigation and superior entity detection",
+    
+    "permissions": [
+        "activeTab",
+        "storage",
+        "tabs"
+    ],
+    
+    "host_permissions": [
+        "*://portal-nc.tylertech.cloud/*",
+        "*://*.tylertech.cloud/*"
+    ],
+    
+    "content_scripts": [
+        {
+            "matches": [
+                "*://portal-nc.tylertech.cloud/*",
+                "*://*.tylertech.cloud/*"
+            ],
+            "js": ["content-enhanced.js"],
+            "css": ["styles.css"],
+            "run_at": "document_idle"
+        }
+    ],
+    
+    "background": {
+        "service_worker": "background.js"
+    },
+    
+    "action": {
+        "default_popup": "popup.html",
+        "default_title": "NC Court Training Extension"
+    },
+    
+    "web_accessible_resources": [
+        {
+            "resources": ["styles.css"],
+            "matches": ["*://portal-nc.tylertech.cloud/*"]
+        }
+    ]
+}

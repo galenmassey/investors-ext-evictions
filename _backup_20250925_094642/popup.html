@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Investors Evictions Extension</title>
+    <style>
+        body {
+            width: 350px;
+            padding: 15px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin: 0;
+        }
+        
+        h2 {
+            margin: 0 0 15px 0;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .version-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: normal;
+        }
+        
+        .stats {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .stat-row:last-child {
+            margin-bottom: 0;
+        }
+        
+        .stat-value {
+            font-weight: bold;
+        }
+        
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 8px;
+            background: white;
+            color: #764ba2;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        button:active {
+            transform: scale(0.98);
+        }
+        
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .danger-btn {
+            background: #ef4444;
+            color: white;
+        }
+        
+        .status {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            padding: 8px;
+            margin-top: 10px;
+            font-size: 12px;
+            text-align: center;
+        }
+        
+        .status.active {
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid rgba(34, 197, 94, 0.5);
+        }
+        
+        .status.inactive {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.5);
+        }
+        
+        .features {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 15px;
+            font-size: 12px;
+        }
+        
+        .feature {
+            margin-bottom: 6px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .feature::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #22c55e;
+            font-weight: bold;
+        }
+        
+        .divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <h2>
+        🏛️ Evictions Extension
+        <span class="version-badge">v1.5</span>
+    </h2>
+    
+    <div class="stats">
+        <div class="stat-row">
+            <span>Session Cases:</span>
+            <span class="stat-value" id="sessionCases">0</span>
+        </div>
+        <div class="stat-row">
+            <span>Qualified:</span>
+            <span class="stat-value" id="qualifiedCount">0</span>
+        </div>
+        <div class="stat-row">
+            <span>Skipped:</span>
+            <span class="stat-value" id="skippedCount">0</span>
+        </div>
+        <div class="stat-row">
+            <span>Detail Pages Saved:</span>
+            <span class="stat-value" id="savedRequests">0</span>
+        </div>
+    </div>
+    
+    <button id="toggleUI">Toggle Training UI</button>
+    <button id="exportData">Export Training Data</button>
+    <button id="clearSession">Clear Session Data</button>
+    
+    <div class="divider"></div>
+    
+    <button id="openSettings">Extension Settings</button>
+    <button id="viewDocs">View Documentation</button>
+    
+    <div class="features">
+        <div style="font-weight: bold; margin-bottom: 8px;">V1.5 Features:</div>
+        <div class="feature">Smart Detail Navigation</div>
+        <div class="feature">Roommate Detection</div>
+        <div class="feature">Enhanced Entity Filtering</div>
+        <div class="feature">97% Server Load Reduction</div>
+    </div>
+    
+    <div id="status" class="status inactive">
+        Extension not active on this page
+    </div>
+    
+    <script src="popup.js"></script>
+</body>
+</html>
