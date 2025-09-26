@@ -1,5 +1,24 @@
+// === Investors page lock (Evictions) ===
+(() => {
+  const MODE = "Evictions";
+  const LOCK_KEY = "__INVESTORS_ACTIVE_MODE__";
+  const active = globalThis[LOCK_KEY];
+  if (active && active !== MODE) {
+    console.debug(`[Investors][${MODE}] Another mode active: ${active}. Skipping.`);
+    return; // abort this script entirely
+  }
+  globalThis[LOCK_KEY] = MODE;
+  addEventListener("beforeunload", () => {
+    if (globalThis[LOCK_KEY] === MODE) delete globalThis[LOCK_KEY];
+  });
+})();
+
 // Content script for NC Court Portal Training Extension - V1.5 with Smart Detail Navigation
 console.log('Case Training Page Reader v1.5 - Smart Detail Page Navigation');
+
+// Namespaced message constants
+const MSG_SCAN = "evict:scan";
+const MSG_RESULT = "evict:result";
 
 // ========== ENTITY DETECTION PATTERNS ==========
 // Comprehensive entity exclusion patterns - strict LLC filtering
