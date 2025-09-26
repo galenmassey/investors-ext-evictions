@@ -21,7 +21,7 @@
                 "*://portal-nc.tylertech.cloud/*",
                 "*://*.tylertech.cloud/*"
             ],
-            "js": ["content-enhanced.js"],
+            "js": ["content.js"],
             "css": ["styles.css"],
             "run_at": "document_idle"
         }
