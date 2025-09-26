@@ -18,6 +18,27 @@ async function safeOpenTab(createProps) {
   return res;
 }
 
+// Safe wrappers for Chrome APIs (micro-pass additions)
+export async function safeQueryTabs(queryInfo) {
+  const p = new Promise((resolve, reject) => {
+    try { chrome.tabs.query(queryInfo, (tabs) => {
+      const err = chrome.runtime.lastError; if (err) reject(err); else resolve(tabs);
+    }); } catch (e) { reject(e); }
+  });
+  const res = await withLastError(p);
+  if (!res.ok) console.warn('[Investors][Evictions] tabs.query failed:', res.error);
+  return res.ok ? res.res : [];
+}
+
+export async function safeExecScript(tabId, fn) {
+  const p = chrome.scripting?.executeScript
+    ? chrome.scripting.executeScript({ target: { tabId }, func: fn })
+    : Promise.reject(new Error('scripting API not available'));
+  const res = await withLastError(p);
+  if (!res.ok) console.warn('[Investors][Evictions] executeScript failed:', res.error);
+  return res.ok ? res.res : null;
+}
+
 // Listen for messages from content script and popup
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (request.action === 'openTab') {
