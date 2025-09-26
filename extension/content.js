@@ -13,6 +13,12 @@
   });
 })();
 
+// Null-safe DOM helpers (use as you edit; no global rewrites)
+const $ = (sel, root=document) => root.querySelector(sel);
+const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel) || []);
+const text = (el) => (el && ('textContent' in el)) ? el.textContent.trim() : '';
+const href = (el) => (el && el.getAttribute) ? el.getAttribute('href') : '';
+
 // Content script for NC Court Portal Training Extension - V1.5 with Smart Detail Navigation
 console.log('Case Training Page Reader v1.5 - Smart Detail Page Navigation');
 
