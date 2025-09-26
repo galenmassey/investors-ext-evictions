@@ -1,11 +1,31 @@
 // Background script for NC Court Training Extension V1.5
 
+import { withLastError } from './lib/guards.js';
+
+// Safe tab open
+async function safeOpenTab(createProps) {
+  // Promisify tabs.create (MV3 supports promise form in most channels; fallback if not)
+  const p = new Promise((resolve, reject) => {
+    try {
+      chrome.tabs.create(createProps, (tab) => {
+        const err = chrome.runtime.lastError;
+        if (err) reject(err); else resolve(tab);
+      });
+    } catch (e) { reject(e); }
+  });
+  const res = await withLastError(p);
+  if (!res.ok) console.warn('[Investors][Evictions] tabs.create failed:', res.error);
+  return res;
+}
+
 // Listen for messages from content script and popup
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (request.action === 'openTab') {
-        // Open a new tab with the specified URL
-        chrome.tabs.create({ url: request.url, active: false });
-        sendResponse({ status: 'success' });
+        // Open a new tab with the specified URL - using safe wrapper
+        safeOpenTab({ url: request.url, active: false }).then(res => {
+            sendResponse({ status: res.ok ? 'success' : 'failed', error: res.error });
+        });
+        return true; // Keep channel open for async response
     }
     return true;
 });

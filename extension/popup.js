@@ -103,3 +103,12 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         updateStats();
     }
 });
+
+// Open the extension Options page
+document.getElementById('btn-open-options')?.addEventListener('click', () => {
+  if (chrome.runtime.openOptionsPage) {
+    chrome.runtime.openOptionsPage();
+  } else {
+    window.open(chrome.runtime.getURL('options.html'));
+  }
+});
